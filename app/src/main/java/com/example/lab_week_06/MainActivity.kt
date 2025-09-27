@@ -2,6 +2,7 @@ package com.example.lab_week_06
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lab_week_06.model.CatModel
@@ -15,11 +16,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private val catAdapter by lazy {
-        // Glide is used here to load the images
-        // Here we are passing the onClickListener function to the Adapter
         CatAdapter(layoutInflater, GlideImageLoader(this), object :
             CatAdapter.OnClickListener {
-            // When this is triggered, the pop up dialog will be shown
             override fun onItemClick(cat: CatModel) = showSelectionDialog(cat)
         })
     }
@@ -28,17 +26,21 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Setup the adapter for the recycler view
+        // Setup adapter
         recyclerView.adapter = catAdapter
 
-        // Setup the layout manager for the recycler view
+        // Setup layout manager
         recyclerView.layoutManager = LinearLayoutManager(
             this,
             LinearLayoutManager.VERTICAL,
             false
         )
 
-        // Add data to the model list in the adapter
+        // Attach swipe functionality
+        val itemTouchHelper = ItemTouchHelper(catAdapter.swipeToDeleteCallback)
+        itemTouchHelper.attachToRecyclerView(recyclerView)
+
+        // Add sample data
         catAdapter.setData(
             listOf(
                 CatModel(
@@ -66,7 +68,6 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
-    // This will create a pop up dialog when one of the items from the recycler view is clicked.
     private fun showSelectionDialog(cat: CatModel) {
         AlertDialog.Builder(this)
             .setTitle("Cat Selected")
