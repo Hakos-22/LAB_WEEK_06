@@ -12,10 +12,8 @@ class CatAdapter(
     private val onClickListener: OnClickListener
 ) : RecyclerView.Adapter<CatViewHolder>() {
 
-    // Delete Callback Instantiation (sesuai instruksi)
     val swipeToDeleteCallback = SwipeToDeleteCallback()
 
-    // Mutable list for data
     private val cats = mutableListOf<CatModel>()
 
     fun setData(newCats: List<CatModel>) {
@@ -46,7 +44,6 @@ class CatAdapter(
         fun onItemClick(cat: CatModel)
     }
 
-    // Swipe functionality
     inner class SwipeToDeleteCallback : ItemTouchHelper.SimpleCallback(
         0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
     ) {

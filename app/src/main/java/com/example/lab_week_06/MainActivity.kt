@@ -26,21 +26,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Setup adapter
         recyclerView.adapter = catAdapter
 
-        // Setup layout manager
         recyclerView.layoutManager = LinearLayoutManager(
             this,
             LinearLayoutManager.VERTICAL,
             false
         )
 
-        // Attach swipe functionality
         val itemTouchHelper = ItemTouchHelper(catAdapter.swipeToDeleteCallback)
         itemTouchHelper.attachToRecyclerView(recyclerView)
 
-        // Add sample data
         catAdapter.setData(
             listOf(
                 CatModel(
@@ -63,9 +59,59 @@ class MainActivity : AppCompatActivity() {
                     "Curious George",
                     "Award winning investigator",
                     "https://cdn2.thecatapi.com/images/bar.jpg"
+                ),
+                CatModel(
+                    Gender.Male,
+                    CatBreed.ExoticShorthair,
+                    "Tom",
+                    "Lazy but lovable",
+                    "https://cdn2.thecatapi.com/images/MTY3ODIyMQ.jpg"
+                ),
+                CatModel(
+                    Gender.Female,
+                    CatBreed.AmericanCurl,
+                    "Lucy",
+                    "Smart and sneaky",
+                    "https://cdn2.thecatapi.com/images/9j5.jpg"
+                ),
+                CatModel(
+                    Gender.Male,
+                    CatBreed.BalineseJavanese,
+                    "Oscar",
+                    "Loves to play outside",
+                    "https://cdn2.thecatapi.com/images/6qi.jpg"
+                ),
+                CatModel(
+                    Gender.Female,
+                    CatBreed.ExoticShorthair,
+                    "Molly",
+                    "Sweet and caring",
+                    "https://cdn2.thecatapi.com/images/bpc.jpg"
+                ),
+                CatModel(
+                    Gender.Unknown,
+                    CatBreed.BalineseJavanese,
+                    "Shadow",
+                    "Mysterious wanderer",
+                    "https://cdn2.thecatapi.com/images/7dq.jpg"
+                ),
+                CatModel(
+                    Gender.Male,
+                    CatBreed.AmericanCurl,
+                    "Leo",
+                    "King of the house",
+                    "https://cdn2.thecatapi.com/images/8dj.jpg"
+                ),
+                CatModel(
+                    Gender.Female,
+                    CatBreed.BalineseJavanese,
+                    "Luna",
+                    "Quiet observer",
+                    "https://cdn2.thecatapi.com/images/9dj.jpg"
                 )
             )
         )
+
     }
 
     private fun showSelectionDialog(cat: CatModel) {
